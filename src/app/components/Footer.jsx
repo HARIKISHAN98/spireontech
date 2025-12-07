@@ -1,66 +1,92 @@
-import React from 'react'
+import React from "react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className='bg-[#1f2937]'>
-    <div className='p-5 m-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-      {/* First column */}
-      <div className='p-2 m-2 space-y-4'>
-        {/* Logo */}
-        <div className=''>
-            <img className='w-13 h-15' src='https://spireontech.com/logo.png' alt="logo" />
-            <h2 className='text-[#2563eb] font-bold text-2xl'>Spireon Tech</h2>
-        </div>
-        {/* paragraph */}
-        <p className='text-white font-light'>
+    <footer className="bg-[#1f2937] pt-16 pb-10">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+
+        {/* -------- LEFT COLUMN -------- */}
+        <div className="space-y-5">
+          <div>
+            <img
+              className="w-14 h-14"
+              src="https://spireontech.com/logo.png"
+              alt="Spireon Tech Logo"
+            />
+            <h2 className="text-[#4A5EDB] font-serif font-bold text-2xl mt-2">
+              Spireon Tech
+            </h2>
+          </div>
+
+          <p className="text-gray-300 leading-relaxed">
             Your trusted partner for digital innovation and technology solutions.
-        </p>
-        {/* social-icon */}
-            <ul className='flex flex-row text-white'>
-                <li className='bg-[#374151] rounded-full w-fit my-2'><a href=""><i className='p-3 fab fa-facebook'></i></a></li>
-                <li className='bg-[#374151] rounded-full w-fit m-2'><a href=""><i className='p-3 fab fa-twitter'></i></a></li>
-                <li className='bg-[#374151] rounded-full w-fit m-2'><a href=""><i className='p-3 fab fa-linkedin'></i></a></li>
-                <li className='bg-[#374151] rounded-full w-fit m-2'><a href=""><i className='p-3 fab fa-github'></i></a></li>
-            </ul>
-      </div>
+          </p>
 
-      {/* Services-column */}
-      <div className='p-1 m-2 space-y-4'>
-        <h2 className='text-xl text-white font-semibold'>Services</h2>
-        <ul className='text-white space-y-1.5'>
-            <li>Web Development</li>
-            <li>Mobile Apps</li>
-            <li>Cloud Solutions</li>
-            <li>AI & Automation</li>
-        </ul>
-      </div>
-
-      {/* Company-column */}
-      <div className='p-1 m-2 space-y-4'>
-        <h2 className='text-xl text-white font-semibold'>Company</h2>
-        <ul className='text-white space-y-1.5'>
-            <li>About Us</li>
-            <li>Contact</li>
-            <li>Blog</li>
-            <li>Careers</li>
-        </ul>
-      </div>
-
-      {/* Newsletter & Mail */}
-      <div className='p-1 m-2 space-y-5'>
-        <h2 className='text-xl text-white font-semibold'>Newsletter</h2>
-        <p className='text-white font-light'>Subscribe to our newsletter for the latest tech insights.</p>
-        <div className='flex items-center gap-2'>
-            <input type="email" placeholder='Your email' className='py-2 px-4 rounded-lg text-white bg-[#374151]'/>
-            <button className='py-2 px-4 bg-[#2563eb] rounded-lg text-white cursor-pointer hover:bg-[#436ac0]'>Subscribe</button>
+          {/* Social Icons */}
+          <ul className="flex gap-3">
+            {[
+              { icon: "fab fa-facebook", link: "#" },
+              { icon: "fab fa-twitter", link: "#" },
+              { icon: "fab fa-linkedin", link: "https://www.linkedin.com/company/spireon-tech/" },
+              { icon: "fab fa-github", link: "#" },
+            ].map((item, i) => (
+              <li
+                key={i}
+                className="w-10 h-10 flex items-center justify-center rounded-full 
+                           bg-[#374151] text-white text-lg 
+                           hover:bg-linear-to-br hover:from-[#667FEA] hover:to-[#4A5EDB] 
+                           hover:scale-110 transition-all cursor-pointer"
+              >
+                <Link
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full h-full flex items-center justify-center">
+                  <i className={item.icon}></i>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>    
-    </div>
 
-    {/*Copyright-section */}
-    <div className='p-6 border-t text-[#374151]'> 
-        <p className='text-white text-center'>© 2024 Spireon Tech. All rights reserved.</p>
-    </div>
-    </div>
-  )
+        {/* -------- SERVICES COLUMN -------- */}
+        <div className="space-y-5">
+          <h3 className="text-xl font-semibold text-white font-serif">Services</h3>
+          <ul className="text-gray-300 space-y-2">
+            <li className="hover:text-white transition cursor-pointer"><Link href="/services">Web Development</Link></li>
+            <li className="hover:text-white transition cursor-pointer"><Link href="/services">Mobile Apps</Link></li>
+            <li className="hover:text-white transition cursor-pointer"><Link href="/services">Cloud Solutions</Link></li>
+            <li className="hover:text-white transition cursor-pointer"><Link href="/services">AI & Automation</Link></li>
+          </ul>
+        </div>
+
+        {/* -------- COMPANY COLUMN -------- */}
+        <div className="space-y-5">
+          <h3 className="text-xl font-semibold text-white font-serif">Company</h3>
+          <ul className="text-gray-300 space-y-2">
+            <li className="hover:text-white transition cursor-pointer"><Link href="/about">About Us</Link></li>
+            <li className="hover:text-white transition cursor-pointer"><Link href="/contact"> Contact</Link></li>
+            <li className="hover:text-white transition cursor-pointer"><Link href="/blog">Blog</Link></li>
+            <li className="hover:text-white transition cursor-pointer"><Link href="/carrer">Careers</Link></li>
+          </ul>
+        </div>
+
+        {/* -------- NEWSLETTER COLUMN -------- */}
+        <div className="space-y-5">
+          <h3 className="text-xl font-semibold text-white font-serif">Newsletter</h3>
+          <p className="text-gray-300 leading-relaxed">
+            Subscribe to our newsletter for the latest tech insights.
+          </p>
+        </div>
+      </div>
+
+      {/* COPYRIGHT */}
+      <div className="mt-16 border-t border-gray-700 pt-6 text-center">
+        <p className="text-gray-400">
+          © {new Date().getFullYear()} Spireon Tech. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  );
 }

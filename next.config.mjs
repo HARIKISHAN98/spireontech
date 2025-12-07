@@ -4,4 +4,10 @@ const nextConfig = {
   reactCompiler: true,
 };
 
+// next.config.mjs
+images: {
+  domains: ['images.unsplash.com']
+};
+
+
 export default nextConfig;

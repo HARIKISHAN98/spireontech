@@ -1,19 +1,32 @@
-import React from 'react'
+import React from "react";
 
 export default function ValueCard({ icon, valueName, desc }) {
-    return (
-        <div className='p-6 bg-white border border-gray-100 shadow-sm text-center rounded-xg space-y-4 hover:shadow-lg hover-tranlate-y-1 transition duration-300 h-full'>
-            <div className='w-16 h-16 bg-indigo-100 text-indigo-600 
-                      rounded-full flex items-center justify-center mx-auto text-3xl'><i className={icon}></i></div>
-            <p className='text-xl font-semibold text-gray-900'>{valueName}</p>
-            <p className='text-gray-600 text-sm leading-relaxed'>{desc}</p>
-        </div>
-    )
+  return (
+    <div
+      className="bg-white rounded-2xl border border-gray-100 
+                 shadow-[0_10px_25px_rgba(0,0,0,0.06)]
+                 p-10 text-center space-y-5
+                 hover:shadow-[0_18px_45px_rgba(0,0,0,0.10)]
+                 hover:-translate-y-1 transition-all duration-300 h-full"
+    >
+      {/* Icon Box */}
+      <div
+        className="w-14 h-14 mx-auto rounded-xl flex items-center justify-center
+                   bg-linear-to-br from-[#667FEA] to-[#4A5EDB] text-white text-xl
+                   shadow-md"
+      >
+        <i className={icon}></i>
+      </div>
+
+      {/* Title */}
+      <h3 className="text-lg font-semibold text-gray-900">
+        {valueName}
+      </h3>
+
+      {/* Description */}
+      <p className="text-gray-600 text-lg leading-relaxed">
+        {desc}
+      </p>
+    </div>
+  );
 }
-
-
-
-
-
-
-
