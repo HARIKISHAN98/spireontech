@@ -73,8 +73,16 @@ export default function Navbar() {
             <div className="shrink-0">
               <Link
                 href="/"
-                className="text-lg xs:text-lg sm:text-2xl md:text-3xl font-serif font-bold text-blue-800 truncate max-w-[140px] xs:max-w-none">
-                Spireon Tech
+                className="flex items-center gap-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-blue-800"
+              >
+                <img
+                  src="/logo.png"
+                  alt="Spireon Tech Logo"
+                  className="w-auto h-10 sm:h-12 md:h-14 lg:h-16"
+                />
+
+
+                <span>Spireon Tech</span>
               </Link>
 
             </div>

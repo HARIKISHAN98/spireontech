@@ -17,20 +17,15 @@ export default function Contact() {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  // ---------- HANDLE INPUT CHANGE ----------
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    // optional small sanitation
     const cleanedValue = value.replace(/\s+/g, " ");
-
     setFormData((prev) => ({
       ...prev,
       [name]: cleanedValue,
     }));
   };
 
-  // ---------- VALIDATION ----------
   const validateForm = () => {
     const name = formData.name.trim();
     const email = formData.email.trim();
@@ -40,39 +35,29 @@ export default function Contact() {
     const message = formData.message.trim();
 
     if (!name) return "Please enter your name.";
-    if (!/^[a-zA-Z\s]{2,60}$/.test(name)) {
-      return "Name should contain only letters and spaces (2–60 characters).";
-    }
+    if (!/^[a-zA-Z\s]{2,60}$/.test(name)) return "Name should contain only letters and spaces (2–60 characters).";
 
     if (!email) return "Please enter your email.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return "Please enter a valid email address.";
-    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email address.";
 
-    if (!phone) return "Please enter your phone number.";
-    if (!/^[0-9+\-\s]{7,15}$/.test(phone)) {
+    if (phone && !/^[0-9+\-\s]{7,15}$/.test(phone)) {
       return "Please enter a valid phone number (7–15 digits, + or - allowed).";
     }
 
-    if (!company) return "Please enter your company name.";
-    if (company.length < 2) {
+    if (company && company.length < 2) {
       return "Company name should be at least 2 characters.";
     }
 
-    if (!subject) return "Please enter a subject.";
-    if (subject.length < 5) {
-      return "Subject should be at least 5 characters long.";
+    if (subject && subject.length < 3) {
+      return "Subject should be at least 3 characters long.";
     }
 
     if (!message) return "Please enter your message.";
-    if (message.length < 10) {
-      return "Message should be at least 10 characters long.";
-    }
+    if (message.length < 10) return "Message should be at least 10 characters long.";
 
-    return null; // everything OK
+    return null;
   };
 
-  // ---------- SUBMIT ----------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess("");
@@ -84,26 +69,25 @@ export default function Contact() {
       return;
     }
 
-    if (loading) return; // double-click guard
+    if (loading) return;
 
     setLoading(true);
 
     try {
       await emailjs.send(
-        "service_10gvqmn",        // your EmailJS service ID
-        "template_zmj9rer",       // your template ID
+        "service_10gvqmn",
+        "template_y2lkcu4",
         {
           name: formData.name.trim(),
           email: formData.email.trim(),
           phone: formData.phone.trim(),
           company: formData.company.trim(),
-          title: formData.subject.trim(), // matches {{title}} in template
+          title: formData.subject.trim(),
           message: formData.message.trim(),
         },
-        "kBoch1VLJSn61TeCQ"      // your public key
+        "kBoch1VLJSn61TeCQ"
       );
 
-      // ✅ reset form after success
       setFormData({
         name: "",
         email: "",
@@ -113,17 +97,11 @@ export default function Contact() {
         message: "",
       });
 
-      setSuccess("✅ Message sent successfully! We'll contact you soon.");
-      setError("");
-
-      // Optional: hide success after few seconds
-      setTimeout(() => {
-        setSuccess("");
-      }, 4000);
+      setSuccess("Message sent successfully! We'll contact you soon.");
+      setTimeout(() => setSuccess(""), 4000);
     } catch (err) {
       console.error("EmailJS error:", err);
-      setError("❌ Failed to send message. Please try again later.");
-      setSuccess("");
+      setError("Failed to send message. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -131,29 +109,26 @@ export default function Contact() {
 
   return (
     <section className="w-full bg-[#F8FAFC] py-12 sm:py-16 md:py-20">
-      <div
-        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-14"
-      >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-14">
+
         {/* LEFT SIDE */}
         <div className="space-y-4 sm:space-y-5">
-          <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-[#1F2937] leading-tight">
+          <h2 className="text-xl sm:text-3xl md:text-4xl font-serif font-bold text-[#1F2937]">
             Get In Touch
           </h2>
 
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
-            Ready to start your digital transformation journey?
-            Let’s discuss how we can help your business grow.
+          <p className="text-sm sm:text-base md:text-lg text-gray-600">
+            Ready to start your digital transformation journey? Let’s discuss how we can help your business grow.
           </p>
 
-          {/* Contact Info */}
-          <div className="space-y-3 sm:space-y-4 text-sm sm:text-base md:text-lg text-gray-700">
+          <div className="space-y-4 text-gray-700">
 
             {/* EMAIL */}
             <div
               onClick={() => (window.location.href = "mailto:info@spireontech.com")}
-              className="flex items-start sm:items-center gap-3 cursor-pointer hover:text-blue-600 transition break-all">
-              <span className="p-2 sm:p-3 rounded-lg bg-linear-to-br from-[#667FEA] to-[#4A5EDB] text-white shrink-0">
-                <i className="fas fa-envelope text-sm sm:text-base"></i>
+              className="flex items-start sm:items-center gap-3 cursor-pointer hover:text-blue-600 transition">
+              <span className="p-3 rounded-lg bg-linear-to-br from-[#667FEA] to-[#4A5EDB] text-white">
+                <i className="fas fa-envelope"></i>
               </span>
               <span>info@spireontech.com</span>
             </div>
@@ -161,43 +136,56 @@ export default function Contact() {
             {/* PHONE */}
             <div
               onClick={() => (window.location.href = "tel:+919533839201")}
-              className="flex items-start sm:items-center gap-3 cursor-pointer hover:text-blue-600 transition break-all">
-              <span className="p-2 sm:p-3 rounded-lg bg-linear-to-br from-[#667FEA] to-[#4A5EDB] text-white shrink-0">
-                <i className="fas fa-phone text-sm sm:text-base"></i>
+              className="flex items-start sm:items-center gap-3 cursor-pointer hover:text-blue-600 transition">
+              <span className="p-3 rounded-lg bg-linear-to-br from-[#667FEA] to-[#4A5EDB] text-white">
+                <i className="fas fa-phone"></i>
               </span>
               <span>+91 95338-39201</span>
             </div>
 
-            {/* LOCATION */}
-            <div className="flex items-start sm:items-center gap-3 break-all">
-              <span className="p-2 sm:p-3 rounded-lg bg-linear-to-br from-[#667FEA] to-[#4A5EDB] text-white shrink-0">
-                <i className="fas fa-map-marker-alt text-sm sm:text-base"></i>
-              </span>
-              <span>IT Park, Dehradun (UK)</span>
+            {/* ADDRESSES */}
+            <div className="space-y-4">
+
+              {/* India Office */}
+              <div className="flex items-start gap-3">
+                <span className="p-3 rounded-lg bg-linear-to-br from-[#667FEA] to-[#4A5EDB] text-white">
+                  <i className="fas fa-map-marker-alt"></i>
+                </span>
+                <div>
+                  <strong>India Office</strong>
+                  <div>Hi-Tech City, Hyderabad, India</div>
+                </div>
+              </div>
+
+              {/* USA Office */}
+              <div className="flex items-start gap-3">
+                <span className="p-3 rounded-lg bg-linear-to-br from-[#667FEA] to-[#4A5EDB] text-white">
+                  <i className="fas fa-map-marker-alt"></i>
+                </span>
+                <div>
+                  <strong>USA Office</strong>
+                  <div>Silverleaf Capital, Inc</div>
+                  <div>155 BARTRAM MARKET DR STE 135, PMB 132</div>
+                  <div>SAINT JOHNS, Florida 32259</div>
+                  <div>United States of America (USA)</div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
 
         {/* RIGHT FORM */}
-        <div className="bg-white p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 space-y-5 sm:space-y-6">
-          <h3 className="text-lg sm:text-2xl md:text-3xl font-serif font-bold text-center text-[#1F2937]">
+        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border space-y-5">
+          <h3 className="text-2xl md:text-3xl font-serif font-bold text-center">
             Send Us a Message
           </h3>
 
-          {/* Global success / error message */}
-          {success && (
-            <p className="text-sm sm:text-base text-green-600 text-center">
-              {success}
-            </p>
-          )}
-          {error && (
-            <p className="text-sm sm:text-base text-red-600 text-center">
-              {error}
-            </p>
-          )}
+          {success && <p className="text-green-600 text-center">{success}</p>}
+          {error && <p className="text-red-600 text-center">{error}</p>}
 
-          <form className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
-            {/* Row 1 */}
+          <form className="space-y-4" onSubmit={handleSubmit}>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
                 name="name"
@@ -206,7 +194,8 @@ export default function Contact() {
                 placeholder="Your Name *"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition" />
+                className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition"
+              />
 
               <input
                 name="email"
@@ -215,41 +204,39 @@ export default function Contact() {
                 placeholder="Your Email *"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition" />
+                className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition"
+              />
             </div>
 
-            {/* Row 2 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
                 name="phone"
                 type="tel"
-                required
                 placeholder="Your Phone Number"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition" />
+                className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition"
+              />
 
               <input
                 name="company"
                 type="text"
-                required
                 placeholder="Company Name"
                 value={formData.company}
                 onChange={handleChange}
-                className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition" />
+                className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition"
+              />
             </div>
 
-            {/* Subject */}
             <input
               name="subject"
               type="text"
-              required
               placeholder="Subject *"
               value={formData.subject}
               onChange={handleChange}
-              className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition" />
+              className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition"
+            />
 
-            {/* Message */}
             <textarea
               name="message"
               rows="4"
@@ -257,18 +244,21 @@ export default function Contact() {
               placeholder="Your Message *"
               value={formData.message}
               onChange={handleChange}
-              className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition resize-none" />
+              className="w-full bg-[#F5F8FA] px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"
+            />
 
-            {/* Button */}
             <div className="flex justify-center sm:justify-start">
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white py-3 px-8 rounded-lg font-semibold shadow-sm hover:shadow-md transition-all w-full sm:w-auto">
+                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-8 rounded-lg w-full sm:w-auto disabled:bg-blue-400"
+              >
                 {loading ? "Sending..." : "Send Message"}
               </button>
             </div>
+
           </form>
+
         </div>
       </div>
     </section>
