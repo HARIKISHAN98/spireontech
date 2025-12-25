@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <img
               className="w-14 h-14"
-              src="https://spireontech.com/logo.png"
+              src="logo.png"
               alt="Spireon Tech Logo"
             />
             <h2 className="text-[#4A5EDB] font-serif font-bold text-2xl mt-2">
