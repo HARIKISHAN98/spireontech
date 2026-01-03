@@ -84,7 +84,7 @@ export default function Footer() {
       {/* COPYRIGHT */}
       <div className="mt-16 border-t border-gray-700 pt-6 text-center">
         <p className="text-gray-400">
-          © {new Date().getFullYear()} Spireon Tech. All rights reserved.
+          © {2026} Spireon Tech. All rights reserved.
         </p>
       </div>
     </footer>
