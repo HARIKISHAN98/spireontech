@@ -9,19 +9,19 @@ import Contact from '../components/Contact'
 const team = [
   {
     icon: "fas fa-user-tie",
-    name: "Parveen Goyal",
+    name: "Mukesh Garg",
     design: "CEO & Founder",
     desc: "Visionary leader with 15+ years in technology and business strategy.",
   },
   {
     icon: "fas fa-laptop-code",
-    name: "Mukesh Garg",
+    name: "Prateek Gupta",
     design: "CTO",
     desc: "Technical expert specializing in cloud architecture and AI solutions.",
   },
   {
     icon: "fas fa-palette",
-    name: "Prateek Gupta",
+    name: "Sapna Gupta",
     design: "Head of Design",
     desc: "Creative director focused on user experience and digital innovation.",
   },
