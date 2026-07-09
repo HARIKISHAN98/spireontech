@@ -16,7 +16,17 @@ export default async function SolutionDetailPage({ params }) {
         <div className="mb-8 sm:mb-10 text-center">
           <div className="text-4xl sm:text-5xl mb-3">{data.icon}</div>
 
-          <h1 className="text-xl sm:text-3xl font-bold mb-3 leading-tight">
+          {solution === "storageiq" && (
+            <div>
+              <span className="featured-new-badge">New</span>
+            </div>
+          )}
+
+          <h1
+            className={`text-xl sm:text-3xl font-bold mb-3 leading-tight ${
+              solution === "storageiq" ? "featured-title-microsoft" : ""
+            }`}
+          >
             {data.title}
           </h1>
 

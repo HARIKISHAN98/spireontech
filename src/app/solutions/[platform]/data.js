@@ -41,6 +41,11 @@ export const SOLUTION_DATA = {
     subtitle: "Modern Microsoft enterprise platforms & cloud services.",
     items: [
       {
+        title: "StorageIQ",
+        slug: "storageiq",
+        description: "Intelligent storage management for Microsoft environments."
+      },
+      {
         title: "Microsoft 365",
         slug: "microsoft-365",
         description: "Secure collaboration, communication and productivity tools."
