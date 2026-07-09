@@ -82,6 +82,20 @@ export const SOLUTION_DETAIL_DATA = {
 
     /* ================= MICROSOFT ================= */
 
+    "storageiq": {
+        icon: "💾",
+        title: "StorageIQ",
+        description: "A discovery-to-decision platform built on Microsoft Graph API and Azure —purpose-built for enterprises that need a defensible, board-ready storage optimization case.",
+        overview: "StorageIQ is a discovery-to-decision platform built on Microsoft Graph API and Azure —purpose-built for enterprises that need a defensible, board-ready storage optimization case.",
+        bullets: [
+            "Storage optimization",
+            "Instant Tenant Discovery",
+            "Executive-Grade Financial Model",
+            "Read-Only, Zero-Risk Access",
+            "Compliance-Safe Archival Roadmap",
+            "Cost reduction"
+        ]
+    },
     "azure-cloud": {
         icon: "☁️",
         title: "Azure Cloud",

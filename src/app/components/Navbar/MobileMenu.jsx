@@ -100,7 +100,12 @@ export default function MobileMenu({ isOpen, onClose }) {
                     onClick={() => toggleItem(item)}
                     className="flex items-center justify-between w-full px-6 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-700 transition-colors"
                   >
-                    <span>{item}</span>
+                    <span className="inline-flex items-center gap-2">
+                      {item}
+                      {item === "Solutions" && (
+                        <span className="featured-new-badge featured-new-badge-nav">New</span>
+                      )}
+                    </span>
 
                     <svg
                       className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""
@@ -157,6 +162,10 @@ export default function MobileMenu({ isOpen, onClose }) {
                               )
                               .map((subItem, subIndex) => {
                                 const subSlug = slugify(subItem);
+                                const isFeaturedStorageIQ =
+                                  item === "Solutions" &&
+                                  section.title === "Microsoft" &&
+                                  subItem === "StorageIQ";
 
                                 const finalRoute =
                                   item === "About"
@@ -180,8 +189,13 @@ export default function MobileMenu({ isOpen, onClose }) {
                                     key={subIndex}
                                     onClick={onClose}
                                     href={finalRoute}
-                                    className="block px-10 py-2 text-sm text-gray-600 hover:text-blue-700 hover:bg-gray-100 transition-colors"
+                                    className={`block px-10 py-2 text-sm hover:text-blue-700 hover:bg-gray-100 transition-colors ${
+                                      isFeaturedStorageIQ ? "text-gray-600" : "text-gray-600"
+                                    }`}
                                   >
+                                    {isFeaturedStorageIQ && (
+                                      <span className="featured-new-badge featured-new-badge-item">New</span>
+                                    )}
                                     {subItem}
                                   </Link>
                                 );
