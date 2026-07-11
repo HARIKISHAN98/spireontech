@@ -6,7 +6,7 @@ export default function TestimonialCard({ quote, name, role }) {
       className=" bg-white rounded-2xl border border-gray-100 shadow-[0_6px_24px_rgba(0,0,0,0.04)] p-5 sm:p-6 md:p-8 flex flex-col justify-between " >
       {/* ✅ Quote – mobile font & spacing fixed */}
       <p className="text-gray-600 italic leading-relaxed mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base">
-        "{quote}"
+        &ldquo;{quote}&rdquo;
       </p>
 
       {/* ✅ Author – vertical balance & font scaling */}

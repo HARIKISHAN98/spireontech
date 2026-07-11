@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -13,6 +14,7 @@ export default function Navbar() {
 
   const menuItems = [
     { name: "Services", hasDropdown: true },
+    { name: "SharePoint StorageIQ", href: "/solutions/microsoft/storageiq" },
     { name: "Solutions", hasDropdown: true },
     { name: "Work", hasDropdown: false },
     { name: "Insights", hasDropdown: true },
@@ -68,17 +70,19 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
       <nav ref={navRef} className="relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-16 gap-3">
 
             <div className="shrink-0">
               <Link
                 href="/"
-                className="flex items-center gap-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-blue-800"
+                className="flex items-center gap-2 text-xl sm:text-2xl font-serif font-bold text-blue-800"
               >
-                <img
+                <Image
                   src="/logo.png"
                   alt="Spireon Tech Logo"
-                  className="w-auto h-10 sm:h-12 md:h-14 lg:h-16"
+                  width={160}
+                  height={40}
+                  className="h-9 w-auto sm:h-10"
                 />
 
 
@@ -87,7 +91,7 @@ export default function Navbar() {
 
             </div>
 
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden xl:flex items-center space-x-5">
               {menuItems.map((item) => (
                 <div
                   key={item.name}
@@ -97,14 +101,17 @@ export default function Navbar() {
                   }
                   onMouseLeave={handleMouseLeave}
                 >
-                  {item.name === "Work" ? (
+                  {item.href || item.name === "Work" ? (
                     <Link
-                      href="/work"
-                      className={`flex items-center gap-1 py-2 text-lg font-medium transition-colors relative group ${activeMenu === item.name
+                      href={item.href || "/work"}
+                      className={`flex items-center gap-1 py-2 text-base font-medium transition-colors relative group ${activeMenu === item.name
                           ? "text-blue-700"
                           : "text-gray-700 hover:text-blue-700"
                         }`}
                     >
+                      {item.name === "SharePoint StorageIQ" && (
+                        <span className="featured-new-badge featured-new-badge-nav">New</span>
+                      )}
                       {item.name}
                       <span
                         className={`absolute bottom-0 left-0 w-full h-0.5 bg-blue-700 transform origin-left transition-transform duration-200 group-hover:scale-x-100 scale-x-0`}
@@ -112,16 +119,11 @@ export default function Navbar() {
                     </Link>
                   ) : (
                     <p
-                      className={`inline-flex items-center gap-1 py-2 text-lg font-medium transition-colors relative group ${activeMenu === item.name
+                      className={`inline-flex items-center gap-1 py-2 text-base font-medium transition-colors relative group ${activeMenu === item.name
                           ? "text-blue-700"
                           : "text-gray-700 hover:text-blue-700"
                         }`}
                     >
-                      {item.name === "Solutions" && (
-                        <span className="featured-new-badge featured-new-badge-nav">New</span>
-                        // <span className="featured-new-badge featured-new-badge-nav featured-new-badge-nav-floating">New</span>
-                      )}
-
                       {item.name}
                       {item.hasDropdown && (
                         <svg
@@ -153,7 +155,7 @@ export default function Navbar() {
 
             </div>
 
-            <div className="hidden lg:block">
+            <div className="hidden xl:block">
               <Link
                 href="/contact"
                 className="ml-2 inline-flex items-center px-5 py-2 text-sm font-medium text-white bg-blue-900 hover:bg-blue-800 rounded-md transition-colors">
@@ -162,7 +164,7 @@ export default function Navbar() {
             </div>
 
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="xl:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open menu"
             >

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -9,10 +10,12 @@ export default function Footer() {
         {/* -------- LEFT COLUMN -------- */}
         <div className="space-y-5">
           <div>
-            <img
+            <Image
               className="w-14 h-14"
-              src="logo.png"
+              src="/logo.png"
               alt="Spireon Tech Logo"
+              width={56}
+              height={56}
             />
             <h2 className="text-[#4A5EDB] font-serif font-bold text-2xl mt-2">
               Spireon Tech

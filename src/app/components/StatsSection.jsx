@@ -2,16 +2,16 @@
 
 import { useState, useEffect, useRef } from "react";
 
-export default function StatsSection() {
-  const stats = [
-    { number: 50, label: "Projects Completed" },
-    { number: 25, label: "Happy Clients" },
-    { number: 5, label: "Years Experience" },
-    { number: 99, label: "Client Satisfaction" },
-  ];
+const STATS = [
+  { number: 50, label: "Projects Completed" },
+  { number: 25, label: "Happy Clients" },
+  { number: 5, label: "Years Experience" },
+  { number: 99, label: "Client Satisfaction" },
+];
 
+export default function StatsSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [counts, setCounts] = useState(stats.map(() => 0));
+  const [counts, setCounts] = useState(STATS.map(() => 0));
   const sectionRef = useRef(null);
 
   /* 🔥 Detect when section enters viewport */
@@ -40,7 +40,7 @@ export default function StatsSection() {
       const now = performance.now();
       const progress = Math.min((now - startTime) / duration, 1);
 
-      setCounts(stats.map((stat) => Math.floor(progress * stat.number)));
+      setCounts(STATS.map((stat) => Math.floor(progress * stat.number)));
 
       if (progress < 1) requestAnimationFrame(animate);
     }
@@ -59,7 +59,7 @@ export default function StatsSection() {
       >
         <div className="h-full flex flex-col justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 py-8 sm:py-10 md:py-14 text-center">
-            {stats.map((stat, i) => (
+            {STATS.map((stat, i) => (
               <div key={i} className="flex flex-col items-center gap-1 sm:gap-2">
                 
                 {/* ✅ Number — Mobile Scaled */}

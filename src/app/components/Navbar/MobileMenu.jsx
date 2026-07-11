@@ -21,19 +21,19 @@ export default function MobileMenu({ isOpen, onClose }) {
     }));
   };
 
-  const menuItems = ["Services", "Solutions", "Work", "Insights", "About"];
+  const menuItems = ["Services", "SharePoint StorageIQ", "Solutions", "Work", "Insights", "About"];
 
   return (
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 xl:hidden"
           onClick={onClose}
         />
       )}
 
       <div
-        className={`fixed top-0 left-0 h-full w-80 max-w-full bg-white z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 left-0 h-full w-80 max-w-full bg-white z-50 transform transition-transform duration-300 ease-in-out xl:hidden ${isOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
         <div className="flex flex-col h-full">
@@ -62,6 +62,20 @@ export default function MobileMenu({ isOpen, onClose }) {
           {/* MENU */}
           <nav className="flex-1 overflow-y-auto py-4">
             {menuItems.map((item) => {
+              if (item === "SharePoint StorageIQ") {
+                return (
+                  <Link
+                    key={item}
+                    onClick={onClose}
+                    href="/solutions/microsoft/storageiq"
+                    className="flex items-center gap-2 px-6 py-3 text-gray-700 hover:bg-gray-50 hover:text-blue-700 transition-colors"
+                  >
+                    <span className="featured-new-badge featured-new-badge-nav">New</span>
+                    {item}
+                  </Link>
+                );
+              }
+
               const hasSubmenu = menuData[item]?.data;
               const isLinkOnly = menuData[item]?.type === "link";
               const isExpanded = expandedItems[item];
@@ -102,9 +116,6 @@ export default function MobileMenu({ isOpen, onClose }) {
                   >
                     <span className="inline-flex items-center gap-2">
                       {item}
-                      {item === "Solutions" && (
-                        <span className="featured-new-badge featured-new-badge-nav">New</span>
-                      )}
                     </span>
 
                     <svg
@@ -162,11 +173,6 @@ export default function MobileMenu({ isOpen, onClose }) {
                               )
                               .map((subItem, subIndex) => {
                                 const subSlug = slugify(subItem);
-                                const isFeaturedStorageIQ =
-                                  item === "Solutions" &&
-                                  section.title === "Microsoft" &&
-                                  subItem === "StorageIQ";
-
                                 const finalRoute =
                                   item === "About"
                                     ? subItem === "Who we are"
@@ -189,13 +195,8 @@ export default function MobileMenu({ isOpen, onClose }) {
                                     key={subIndex}
                                     onClick={onClose}
                                     href={finalRoute}
-                                    className={`block px-10 py-2 text-sm hover:text-blue-700 hover:bg-gray-100 transition-colors ${
-                                      isFeaturedStorageIQ ? "text-gray-600" : "text-gray-600"
-                                    }`}
+                                    className="block px-10 py-2 text-sm text-gray-600 hover:text-blue-700 hover:bg-gray-100 transition-colors"
                                   >
-                                    {isFeaturedStorageIQ && (
-                                      <span className="featured-new-badge featured-new-badge-item">New</span>
-                                    )}
                                     {subItem}
                                   </Link>
                                 );

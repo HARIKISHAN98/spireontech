@@ -77,7 +77,7 @@ const menuData = {
       },
       {
         title: "Microsoft",
-        items: ["StorageIQ", "Microsoft 365", "Azure Cloud", "Microsoft Intune", "Power Platform"],
+        items: ["Microsoft 365", "Azure Cloud", "Microsoft Intune", "Power Platform"],
       },
       {
         title: "ARTIFICIAL INTELLIGENCE",
@@ -185,24 +185,13 @@ export default function MegaMenu({ activeMenu, onMouseEnter, onMouseLeave }) {
                   <ul className="space-y-3">
                     {column.items.map((item, itemIndex) => {
                       const serviceSlug = slugify(item);
-                      const isFeaturedStorageIQ =
-                        activeMenu === "Solutions" &&
-                        column.title === "Microsoft" &&
-                        item === "StorageIQ";
-
                       return (
                         <li key={itemIndex}>
-                          {isFeaturedStorageIQ && (
-                            <span className="featured-new-badge featured-new-badge-item">New</span>
-                          )}
-
                           {/* ✅ SERVICE ROUTE */}
                           <Link
                             href={`/${baseRoute}/${categorySlug}/${serviceSlug}`}
                             onClick={onMouseLeave}
-                            className={`text-[14px] leading-6 hover:text-[#063B6F] hover:underline transition-colors ${
-                              isFeaturedStorageIQ ? "featured-title-microsoft" : "text-gray-700"
-                            }`}
+                            className="text-[14px] leading-6 text-gray-700 hover:text-[#063B6F] hover:underline transition-colors"
                           >
                             {item}
                           </Link>

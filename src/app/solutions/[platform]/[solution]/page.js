@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SOLUTION_DETAIL_DATA } from "./data";
+import StorageIQPage from "./StorageIQPage";
 
 export default async function SolutionDetailPage({ params }) {
   const { solution } = await params;
@@ -7,6 +8,10 @@ export default async function SolutionDetailPage({ params }) {
 
   if (!data) {
     return <div className="py-24 text-center text-xl">Solution Not Found</div>;
+  }
+
+  if (solution === "storageiq") {
+    return <StorageIQPage />;
   }
 
   return (
